@@ -1,0 +1,35 @@
+/* Fade-in animation */
+@keyframes pop-in {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  
+  /* Fade-out animation */
+  @keyframes pop-out {
+    0% {
+      opacity: 1;
+      transform: scale(1);
+    }
+    100% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+  }
+
+  
+  .toasts {
+    opacity: 0;
+    transform: scale(0.5);
+    animation: pop-in 0.3s ease-in-out forwards;
+  }
+  
+  .toast.hide {
+    animation: pop-out 0.3s ease-in-out forwards;
+  }
+  
