@@ -8,7 +8,7 @@ export default function Toast() {
 
 
   return <>
-  <div class={`${toastContext.isShowToast ? 'show' : ''} toast toastStyle align-items-center z-4 position-fixed end-0 me-2`} role="alert" aria-live="assertive" aria-atomic="true">
+  <div class={`${toastContext.isShowToast ? 'show' : ''} toast toastStyle align-items-center z-7 position-fixed end-0 me-2`} role="alert" aria-live="assertive" aria-atomic="true">
   <div class="d-flex">
     <div class="toast-body text-sm small">
         <span >  با موفقیت به سبد خرید شما اضافه شد</span>

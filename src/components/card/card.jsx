@@ -1,11 +1,47 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import DataContext from "../Context/dataContext";
 
 export default function Card() {
-  const CloseToast = useContext(DataContext);
   const cardData = useContext(DataContext);
-  const navCardCon=useContext(DataContext);
-  const [count, setCount]=useState(0)
+  useEffect(() => {
+    cardData.cardContent.length !== 0
+      ? cardData.setShowEmpt(false)
+      : cardData.setShowEmpt(true);
+    cardData.setNavCardCo(cardData.cardContent.length);
+  }, [cardData.cardContent]);
+
+  const clickHandler = (product) => {
+    // show toast
+    cardData.setIsShowToast(true);
+    setTimeout(() => {
+      cardData.setIsShowToast(false);
+    }, 1000);
+
+    // passing product to sidebar
+    const checkrepetition = cardData.cardContent.some(
+      (checkP) => checkP.name === product.name
+    );
+
+    let newUserCard;
+
+    if (!checkrepetition) {
+      newUserCard = {
+        id: cardData.cardContent.length + 1,
+        title: product.title,
+        imgUrl: product.imgUrl,
+        name: product.name,
+        price: product.price,
+        number: 1,
+      };
+
+      cardData.setCardContent((prev) => [...prev, newUserCard]);
+    } else {
+      const newerUC = [...cardData.cardContent];
+      newerUC.some(
+        (checkpr) => checkpr.name === product.name && checkpr.number++
+      );
+    }
+  };
   return (
     <>
       {cardData.allProducts.map((productsection) => (
@@ -49,42 +85,7 @@ export default function Card() {
                 <a
                   href="javascript:void(0)"
                   className="card-link toasts"
-                  onClick={(e) => {
-                    CloseToast.setIsShowToast(true);
-                    setTimeout(() => {
-                      CloseToast.setIsShowToast(false);
-                    }, 1000);
-
-                    navCardCon.setNavCardCo(count)
-                    setCount((prev)=>prev+1)
-
-                    const checkrepetition = cardData.cardContent.some(
-                      (checkP) => checkP.name === product.name
-                    );
-
-                    let newUserCard;
-          
-                    if (!checkrepetition) {
-                      newUserCard = {
-                        id: cardData.cardContent.length + 1,
-                        title: product.title,
-                        imgUrl: product.imgUrl,
-                        name: product.name,
-                        price: product.price,
-                        number: 1,
-                      };
-                    
-                      cardData.setCardContent((prev) => [...prev, newUserCard]);
-              
-                    } 
-                    else {
-                      const newerUC=[...cardData.cardContent];
-                      newerUC.find(checkpr=>checkpr.name===product.name&& checkpr.number++)
-                    
-               
-                    }
-
-                  }}
+                  onClick={() => clickHandler(product)}
                   style={{ cursor: "pointer" }}
                 >
                   Add to card

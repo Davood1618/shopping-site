@@ -1,6 +1,6 @@
 .mainCard{
     background-color: rgb(255, 255, 255);
-    height: 100vh;
+    height: 92vh;
     /* width: 20%; */
     max-width: 350px;
     /* margin-top: 10vh; */
@@ -42,3 +42,9 @@
   background-color: rgba(0, 0, 0, 0.6);
 }
 
+/*icon*/
+/* .icon{
+  height: 20vh;
+  width: 20vh;
+
+} */

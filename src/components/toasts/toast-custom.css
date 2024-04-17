@@ -2,4 +2,6 @@
 .toastStyle{
     max-width: fit-content;
     margin-top: 80vh;
+    display:block;
+    z-index: 999;
 }

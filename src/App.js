@@ -14,9 +14,9 @@ export default function App() {
   const [allProducts, setproductsConst] = useState(products);
   const [isShowToast, setIsShowToast] = useState(false);
   const [isShowCart, setIsShowcart] = useState(false);
-  const [cardContent, setCardContent]=useState([])
-  const [navCardCo, setNavCardCo]=useState(0)
-
+  const [cardContent, setCardContent] = useState([]);
+  const [navCardCo, setNavCardCo] = useState(0);
+  const [showEmp, setShowEmpt] = useState(true);
 
   return (
     <DataContext.Provider
@@ -25,19 +25,23 @@ export default function App() {
         isShowToast,
         setIsShowToast,
         isShowCart,
-        setIsShowcart,cardContent,setCardContent,navCardCo,setNavCardCo,
+        setIsShowcart,
+        cardContent,
+        setCardContent,
+        navCardCo,
+        setNavCardCo,
+        showEmp,
+        setShowEmpt,
       }}
     >
       <Navbar />
-
       <Toast />
       <SideBuy />
-        <div className="container-max-width container d-flex justify-content-center mt-5">
-          <div className="row justify-content-center">
-            <Card />
-          </div>
+      <div className="container-max-width container d-flex justify-content-center mt-5">
+        <div className="row justify-content-center">
+          <Card />
         </div>
-        {/* <Test/> */}
+      </div>
     </DataContext.Provider>
   );
 }

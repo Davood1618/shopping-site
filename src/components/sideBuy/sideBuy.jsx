@@ -1,9 +1,24 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef, useState } from "react";
 import DataContext from "../Context/dataContext";
 import "./sideBuy.css";
+import EmptyCard from "./../emptyCard/emptyCard";
 
 export default function SideBuy() {
   const sideDate = useContext(DataContext);
+  const newd = [...sideDate.cardContent];
+
+  const deleteClickHandler = (product) => {
+    const newArray = newd.filter(
+      (deletedProduct) => deletedProduct.name !== product.name
+    );
+    sideDate.setCardContent(newArray);
+    let newLength = newArray.length;
+    sideDate.setNavCardCo(newLength);
+
+    {
+      newArray == 0 ? sideDate.setShowEmpt(true) : sideDate.setShowEmpt(false);
+    }
+  };
 
   return (
     <div className="d-flex">
@@ -12,13 +27,17 @@ export default function SideBuy() {
           sideDate.isShowCart ? " sidebar-show" : "sidebar-hidden"
         } z-4 end-0`}
       >
-        <div className=" mainCard shadow-lg justify-content-center sidebar-sho" style={{ overflowY: 'auto' }}>
+        <div
+          className=" mainCard shadow-lg justify-content-center sidebar-sho"
+          style={{ overflowY: "auto" }}
+        >
           <button
             className="btn btn-danger"
             style={{
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
+              margin: "5px 0 5px 5px",
             }}
             onClick={() => {
               sideDate.setIsShowcart(false);
@@ -35,6 +54,9 @@ export default function SideBuy() {
               <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
             </svg>
           </button>
+          {sideDate.showEmp ? <EmptyCard /> : null}
+
+          {/* <BsBasket3 className="icon"/> */}
           {sideDate.cardContent.map((product) => (
             <div
               className="card shadow-lg d-flex align-items-center justify-content-center  mb-3"
@@ -77,6 +99,13 @@ export default function SideBuy() {
                 </li>
                 <li className="list-group-item">more information</li>
               </ul>
+              <button
+                className="btn btn-sm btn-danger small"
+                style={{ margin: "5px 0 5px 0" }}
+                onClick={() => deleteClickHandler(product)}
+              >
+                delete
+              </button>
               {/* <div className="card-body">
                 <a href="#" className="card-link">
                   Add to card
